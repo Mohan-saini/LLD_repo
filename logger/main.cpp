@@ -1,8 +1,13 @@
 #include <iostream>
 #include <chrono>
 #include <iomanip>
+#include <sstream>
+#include <fstream>
+#include <format>
 
 using namespace std;
+
+#define LOG_INFO(msg) Logger::getInstance().log(LogLevel::INFO, msg, __FILE__, __LINE__)
 
 enum class LogLevel{
     INFO,
@@ -24,14 +29,25 @@ string log_level_to_string(LogLevel level) {
 class IAppender {
     public:
         virtual ~IAppender() = default;
-        virtual void log(string log_msg) = 0;
+        virtual void log(const string& log_msg) = 0;
 };
 
 class ConsoleAppender : public IAppender {
     public:
-        void log(string log_msg) override {
+        void log(const string& log_msg) override {
             cout<<log_msg<<endl;
         }
+};
+
+class FileAppender : public IAppender {
+    public:
+        void log(const string& log_msg) override {
+            if (file_.is_open()) {
+                file_<<log_msg<<endl;
+            }
+        }
+    private:
+        std::ofstream file_;
 };
 
 class Iformatter {
@@ -71,6 +87,6 @@ class Logger {
 
 int main()
 {
-    Logger::getInstance().log(LogLevel::INFO, "Hello World!!", __FILE__, __LINE__);
+    LOG_INFO("Hello World!!");
     return 0;
 }

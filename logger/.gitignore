@@ -1,0 +1,58 @@
+# Build files
+*.o
+*.obj
+*.exe
+*.out
+*.app
+*.dll
+*.so
+*.dylib
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# IDE specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+.vs/
+
+# Build directories
+build/
+debug/
+release/
+bin/
+obj/
+
+# Dependency directories
+deps/
+vendor/
+
+# Generated files
+*.map
+*.hex
+*.bin
+*.elf
+
+# Backup files
+*~
+*.bak
+*.backup
+
+# Log files
+*.log
+*.txt
+
+# Project specific
+config.local
+settings.private
